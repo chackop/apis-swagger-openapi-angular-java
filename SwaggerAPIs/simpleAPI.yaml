@@ -1,0 +1,30 @@
+openapi: 3.0.0
+info:
+  title: Sports App API
+  version: 1.0.0
+paths:
+  /product:
+    get:
+      responses:
+        200:
+          description: list of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    createdDate:
+                      type: string
+                      format: date
+                    tagline:
+                      type: string
+                    content:
+                      type: string
+                    category:
+                      type: string
+                    tags:
+                      type: array
+                      items:
+                        type: string
