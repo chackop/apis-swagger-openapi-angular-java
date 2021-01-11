@@ -1,0 +1,31 @@
+
+
+h3 {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: .5407911001em;
+    color: #c0af00;
+    width: 350px;
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.product{
+    border: 1px solid lightgray; 
+    float: left;
+    padding: 5px; 
+    margin: 5px; 
+    width: 350px;
+    height: 450px;
+    max-height: 450px;
+}
+
+li.product img {
+    height: 324px; 
+    width: 324px;
+}

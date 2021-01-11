@@ -1,0 +1,9 @@
+<img width="200" height="100" src="assets/H-logo_470x271-300x173.png" class="custom-logo" alt="H+ Sport" itemprop="logo"/>
+<h2>H Plus Sport Product Catalog</h2>
+<ul>
+  <li *ngFor="let product of products" class="md-4 product">
+    <img src="{{product.image}}" />
+    <h3>{{product.name}}</h3>
+    <p>{{product.description}}</p>
+  </li>
+</ul>
