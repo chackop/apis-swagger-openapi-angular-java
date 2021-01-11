@@ -4,7 +4,7 @@ info:
   version: 1.0.0
 servers: 
   - description: SwaggerHub API Auto Mocking
-    url:  https://virtserver.swaggerhub.com/hplussport1/catalog/1.0.0
+    url:  https://virtserver.swaggerhub.com/chackop/catalog/1.0.0
 tags:
   - name: order
     description: This is an order related operation
@@ -21,14 +21,14 @@ paths:
        content:
          application/json:
            schema:
-             $ref: 'https://api.swaggerhub.com/domains/hplussport1/hplus/2.0.0#/components/schemas/Order'
+             $ref: 'https://api.swaggerhub.com/domains/chackop/hplus/2.0.0#/components/schemas/Order'
      responses:
        200:
          description: This is a successful response
          content:
            application/json:
              schema:
-               $ref: 'https://api.swaggerhub.com/domains/hplussport1/hplus/2.0.0#/components/schemas/Order'
+               $ref: 'https://api.swaggerhub.com/domains/chackop/hplus/2.0.0#/components/schemas/Order'
   /product/{productId}:
     get:
       tags: 

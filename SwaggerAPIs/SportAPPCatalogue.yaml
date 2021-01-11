@@ -14,14 +14,14 @@ paths:
        content:
          application/json:
            schema:
-             $ref: 'https://api.swaggerhub.com/domains/hplussport1/hplus/2.0.0#/components/schemas/Order'
+             $ref: 'https://api.swaggerhub.com/domains/chackop/hplus/2.0.0#/components/schemas/Order'
      responses:
        200:
          description: This is a successful response
          content:
            application/json:
              schema:
-               $ref: 'https://api.swaggerhub.com/domains/hplussport1/hplus/2.0.0#/components/schemas/Order'
+               $ref: 'https://api.swaggerhub.com/domains/chackop/hplus/2.0.0#/components/schemas/Order'
   /product/{productId}:
     get:
       tags: 

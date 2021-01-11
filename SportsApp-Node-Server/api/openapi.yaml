@@ -1,0 +1,261 @@
+openapi: 3.0.0
+info:
+  title: H Plus Sports API
+  version: 3.0.1
+servers:
+- url: https://virtserver.swaggerhub.com/chackop/customer/3.0.1
+  description: SwaggerHub API Auto Mocking
+tags:
+- name: order
+  description: This is an order related operation
+- name: product
+  description: This is a product related operation
+paths:
+  /order:
+    post:
+      tags:
+      - order
+      operationId: orderPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        "200":
+          description: This is a successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+      security:
+      - password:
+        - write
+      x-swagger-router-controller: Order
+  /product/{productId}:
+    get:
+      tags:
+      - product
+      operationId: productProductIdGET
+      parameters:
+      - name: productId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          example: 12345
+      - name: customer-security-header
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: This is a list of the products in the catalog
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        "500":
+          description: This is an unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_500'
+      x-swagger-router-controller: Product
+  /product:
+    get:
+      tags:
+      - product
+      operationId: productGET
+      parameters:
+      - name: pageNumber
+        in: query
+        description: Page number to return
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          example: 1
+      - name: pageSize
+        in: query
+        description: Number of results in the page
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 100
+          type: integer
+          example: 10
+      responses:
+        "200":
+          description: This is a list of the products in the catalog
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+                x-content-type: application/json
+        "500":
+          description: This is an unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_500'
+      x-swagger-router-controller: Product
+    post:
+      tags:
+      - product
+      description: Add a product to the catalog
+      operationId: productPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        "200":
+          description: The product has been created.
+        "500":
+          description: This is an unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_500'
+      security:
+      - password:
+        - write
+      x-swagger-router-controller: Product
+components:
+  schemas:
+    Product:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 400
+        name:
+          type: string
+          example: Lemon Water
+        description:
+          type: string
+          example: Lemon Water
+        image_title:
+          type: string
+          example: mineral-water-lemon-lime
+        image:
+          type: string
+          example: https://hplussport.com/images/1234
+      example:
+        image: https://hplussport.com/images/1234
+        name: Lemon Water
+        description: Lemon Water
+        id: 400
+        image_title: mineral-water-lemon-lime
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        productId:
+          type: integer
+          example: 1234
+        quantity:
+          type: integer
+          example: 1
+        orderDate:
+          type: string
+          format: date-time
+          example: 2019-01-10T16:37:30-08:00
+        customer:
+          $ref: '#/components/schemas/Customer'
+      example:
+        quantity: 1
+        productId: 1234
+        id: 1
+        orderDate: 2019-01-10T16:37:30-08:00
+        customer:
+          firstName: John
+          lastName: Smith
+          phone: 555-555-5555
+          customerNumber: d290f1ee
+    Customer:
+      required:
+      - customerNumber
+      - firstName
+      - lastName
+      type: object
+      properties:
+        customerNumber:
+          type: string
+          example: d290f1ee
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Smith
+        phone:
+          type: string
+          example: 555-555-5555
+      example:
+        firstName: John
+        lastName: Smith
+        phone: 555-555-5555
+        customerNumber: d290f1ee
+    inline_response_500:
+      type: object
+      properties:
+        statusCode:
+          type: string
+          example: "500"
+        message:
+          type: string
+          example: This is an error
+  responses:
+    "500ApiError":
+      description: This is an unexpected error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_response_500'
+  parameters:
+    PageNumber:
+      name: pageNumber
+      in: query
+      description: Page number to return
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: integer
+        example: 1
+    PageSize:
+      name: pageSize
+      in: query
+      description: Number of results in the page
+      required: false
+      style: form
+      explode: true
+      schema:
+        maximum: 100
+        type: integer
+        example: 10
+  securitySchemes:
+    password:
+      type: oauth2
+      flows:
+        password:
+          tokenUrl: http://example.com/oauth/token
+          scopes:
+            write: allows modifying resources
+            read: allows reading resources
